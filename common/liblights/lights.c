@@ -1,4 +1,5 @@
 /*
+** Copyright 2013, idroidproject.org <fergy@idroidproject.org>
  * Copyright (C) 2010 The iDroid Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ /* LOG: 02032013: LOGx swap to RLOGx compat and dissabled. */
 
 #define LOG_TAG "lights"
 
-#include <cutils/log.h>
+#include <utils/Log.h>
 
 #include <stdint.h>
 #include <string.h>
@@ -67,7 +68,7 @@ write_int(char const* path, int value)
         return amt == -1 ? -errno : 0;
     } else {
         if (already_warned == 0) {
-            LOGE("write_int failed to open %s\n", path);
+            //RLOGE("write_int failed to open %s\n", path);
             already_warned = 1;
         }
         return -errno;
@@ -100,7 +101,7 @@ set_light_backlight(struct light_device_t* dev,
     pthread_mutex_lock(&g_lock);
     g_backlight = brightness;
     err = write_int("/sys/class/backlight/iphone-bl/brightness", brightness);
-    LOGI("set_light_backlight brightness=%d\n", brightness);
+    //RLOGI("set_light_backlight brightness=%d\n", brightness);
     pthread_mutex_unlock(&g_lock);
     return err;
 }

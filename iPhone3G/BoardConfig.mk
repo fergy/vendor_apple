@@ -9,6 +9,8 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB :=
 #WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/libertas_sdio.ko"
 #WIFI_DRIVER_MODULE_ARG      := ""
 #WIFI_DRIVER_MODULE_NAME     := "libertas_sdio"
-
+TARGET_KERNEL_CONFIG := $(LOCAL_PATH)/iphone3g_defconfig
+#TODO: To avoid problems and hang-ups, make prebuilt kernel!
+#TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/kernel
 COMMON := $(LOCAL_PATH)/../common
 include $(COMMON)/BoardConfigCommon.mk

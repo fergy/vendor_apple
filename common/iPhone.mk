@@ -17,39 +17,11 @@
 PRODUCT_POLICY := android.policy_phone
 
 PRODUCT_PACKAGES := \
-	    bouncycastle \
 	    com.android.location.provider \
 	    com.android.location.provider.xml \
-	    core \
-	    core-junit \
-	    create_test_dmtrace \
-	    dalvikvm \
-	    dexdeps \
-	    dexdump \
-	    dexlist \
-	    dexopt \
-	    dmtracedump \
-	    dvz \
-	    dx \
-	    ext \
-	    framework-res \
-	    hprof-conv \
-	    icu.dat \
-	    jasmin \
-	    jasmin.jar \
-	    libcrypto \
-	    libdex \
-	    libdvm \
-	    libexpat \
-	    libicui18n \
-	    libicuuc \
-	    libjavacore \
-	    libnativehelper \
-	    libnfc_ndef \
-	    libsqlite_jni \
-	    libssl \
-	    libz \
-	    sqlite-jdbc \
+	    com.android.future.usb.accessory \
+	    charger \
+	    charger_res_images \
 	    Browser \
 	    Contacts \
 	    Home \
@@ -81,6 +53,10 @@ PRODUCT_PACKAGES := \
 	    Email \
 	    Gallery \
 	    LatinIME \
+	    LiveWallpapers \
+	    LiveWallpapersPicker \
+	    VisualizationWallpapers \
+	    librs_jni \
 	    Launcher2 \
 	    Mms \
 	    Music \
@@ -95,6 +71,11 @@ PRODUCT_PACKAGES := \
 	    CalendarProvider \
 	    SyncProvider \
 	    VoiceDialer
+
+# We have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
+
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 # host-only dependencies
 ifeq ($(WITH_HOST_DALVIK),true)

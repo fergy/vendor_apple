@@ -1,4 +1,5 @@
 /*
+** Copyright 2013, idroidproject.org <fergy@idroidproject.org>
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2011 The iDroid Project <http://www.idroidproject.org>
  * Based heavily on work by Alexey Roslyakov <alexey.roslyakov@newsycat.com> which is Copyright (C) 2010, 2011 Nitdroid Project
@@ -15,12 +16,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ /* LOG: 02032013: LOGx swap to RLOGx compat and dissabled. */
 
 #define LOG_TAG "sensors"
 #define SENSORS_SERVICE_NAME "sensors"
 
-#include <cutils/log.h>
+#include <utils/Log.h>
 
 #include <stdint.h>
 #include <string.h>
@@ -88,7 +89,7 @@ static int sensors_set_delay_idroid(struct sensors_poll_device_t *dev, int handl
 static int sensors_close_idroid(struct hw_device_t *dev)
 {
     struct sensors_control_device_t *device_control = (void *) dev;
-    LOGD("%s\n", __func__);
+    //RLOGD("%s\n", __func__);
     if (sensor_fd > 0) {
         close(sensor_fd);
         sensor_fd = -1;
@@ -103,13 +104,13 @@ static int sensors_activate_idroid(struct sensors_poll_device_t *dev, int handle
 		if (sensor_fd < 0) {
         	sensor_fd = open(SYSFS_PATH "position", O_RDONLY | O_NONBLOCK);
         	if (sensor_fd < 0) {
-            	LOGE("Opening position failed in %s: %s", __FUNCTION__, strerror(errno));
+            	//RLOGE("Opening position failed in %s: %s", __FUNCTION__, strerror(errno));
             	return -1;
         	}
     	}
    }
 
-    LOGD("%s\n", __func__);
+    //RLOGD("%s\n", __func__);
     return 0;
 }
 
@@ -122,7 +123,7 @@ static int sensors_poll_idroid(struct sensors_poll_device_t *dev, sensors_event_
 
     fd = sensor_fd;
     if (fd < 1) {
-        LOGE("Bad position file descriptor: %d", fd);
+        //RLOGE("Bad position file descriptor: %d", fd);
         return -1;
     }
 
@@ -138,14 +139,14 @@ static int sensors_poll_idroid(struct sensors_poll_device_t *dev, sensors_event_
     } while (ret < 0 && errno == EINTR);
 
     if (ret < 0) {
-        LOGE("%s select error: %s", __func__, strerror(errno));
+        //RLOGE("%s select error: %s", __func__, strerror(errno));
         return -errno;
     }
 
     lseek(fd, 0, SEEK_SET);
     ret = read(fd, coord, sizeof(coord));
     if (ret < 0) {
-        LOGE("%s read error: %s", __func__, strerror(errno));
+        //RLOGE("%s read error: %s", __func__, strerror(errno));
         return -errno;
     }
 
